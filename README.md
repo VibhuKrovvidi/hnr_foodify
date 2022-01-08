@@ -1,5 +1,6 @@
 # hnr_foodify
 
+![flowchart](https://github.com/VibhuKrovvidi/hnr_foodify/blob/main/resources/foodify.png)
 ## Description
 Foodify is an API tool that allows users slice and dice restaurant review data based on the categories or aspects that matter most to them. 
 For example, if you are a student on a budget, the value-for-money that a restaurant offers is of most importance to you.
