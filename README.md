@@ -16,7 +16,12 @@ Flask + Python
 ![flowchart](https://github.com/VibhuKrovvidi/hnr_foodify/blob/main/resources/flow.png)
 
 ## How to use it
-Work in Progress
+
+There are two endpoints, both supporting GET requests:
+
+* `/restaurant/<restaurant_name>` - this returns the standard key aspects and their polarity scores. If given restaurant is not in the database, it will return a 404. 
+
+* `/restaurant/<restaurant_name>/feature` - this returns the polarity score for custom aspect (feature) of given restaurant. In query params, foodify expects a `feature_name` and `corpus` (words that describe the feature). 
 
 ## Team
 Vibhu, Raivat
