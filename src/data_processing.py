@@ -59,6 +59,12 @@ def process_for_restaurant(restaurant_name, current_corpus=default_corpus):
     # final step 
     df["categorised_sentiment"] = df["sentiment_feat"].apply(lambda x:categorise(x, current_corpus, vect_corpus, embeddings_index))
 
+    li = get_avg_polarity(df)
+    print(li)
+    return li;
+
+
+
 def get_feature_descriptors(text):
     doc = en(text)
     # deplacy.render(doc)
@@ -136,4 +142,44 @@ def categorise(feat, current_corpus, vect_corpus, embeddings_index):
     except:
       pass
     
-  return retdict
+  return [retdict]
+
+def get_avg_polarity(df):
+        
+    restaurants = df["Restaurant"].unique()
+    restaurants = list(restaurants)
+
+    avg_sent_list = []
+
+    for rest in restaurants:
+        tdf = df[df["Restaurant"] == rest]
+
+        rmap = dict()
+
+        ser = tdf["categorised_sentiment"].tolist()
+        # print(ser)
+        # break
+        ser = [item for sublist in ser for item in sublist]
+        # print(ser)
+        # break
+        
+        for d in ser:
+            for key in d.keys():
+                if key in rmap:
+                    for v in d[key]:
+                        rmap[key].append(v)
+                else:
+                    rmap[key] = d[key]
+
+        #     rmap.update(d)
+        
+        for key in rmap.keys():
+            if len(rmap[key]) > 0:
+                m = mean(rmap[key])
+                rmap[key] = m
+        # print(rmap)
+        avg_sent_list.append((rest, rmap))
+
+    return avg_sent_list
+
+process_for_restaurant("Art")
