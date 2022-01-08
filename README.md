@@ -12,6 +12,8 @@ Ultimately, we hope to create tools to allow comparisons, rankings, trends and d
 ## How we made it
 Flask + Python
 
+![flowchart](https://github.com/VibhuKrovvidi/hnr_foodify/blob/main/resources/flow.png)
+
 ## How to use it
 Work in Progress
 
