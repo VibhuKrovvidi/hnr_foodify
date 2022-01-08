@@ -26,7 +26,7 @@ def process_for_restaurant(restaurant_name, current_corpus=default_corpus):
     # NOTE: reading from such a massive file is a very costly operation, can improve later
     df = pd.read_csv("scraped_output.csv")
     df.dropna(inplace=True)
-    df.filter(df['Restaurant'] == restaurant_name)
+    df = df[df["Restaurant"] == restaurant_name]
 
     # Apply function to get feature-descriptors
     df["feature_descriptors"] = df["Review"].apply(lambda x:get_feature_descriptors(x))
@@ -60,10 +60,7 @@ def process_for_restaurant(restaurant_name, current_corpus=default_corpus):
     df["categorised_sentiment"] = df["sentiment_feat"].apply(lambda x:categorise(x, current_corpus, vect_corpus, embeddings_index))
 
     li = get_avg_polarity(df)
-    print(li)
-    return li;
-
-
+    return li
 
 def get_feature_descriptors(text):
     doc = en(text)

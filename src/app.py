@@ -12,8 +12,9 @@ def hello_world():
 @app.route("/restaurant/<restaurant_name>", methods=['GET']) 
 def restaurant(restaurant_name):
     # return json of <aspect, polarity score> else 404
-    process_for_restaurant(restaurant_name=restaurant_name)
-    return None
+    data = process_for_restaurant(restaurant_name=restaurant_name)
+    print(data)
+    return data[0][1]
 
 # Specific feature, which may not be in the pre-set options
 @app.route("/restaurant/<restaurant_name>/feature/")
@@ -24,5 +25,5 @@ def restaurant_and_feature(restaurant_name, feature):
         args['feature_name']: args['corpus']
     }
     # return polarity score for given feature else 404 if restaurant not in database
-    process_for_restaurant(restaurant_name=restaurant_name, current_corpus=current_corpus)
-    return None
+    data = process_for_restaurant(restaurant_name=restaurant_name, current_corpus=current_corpus)
+    return data[0][1]
